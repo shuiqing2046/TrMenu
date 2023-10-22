@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import taboolib.common.platform.function.console
 import taboolib.common.platform.function.submit
-import taboolib.common.reflect.Reflex.Companion.getProperty
-import taboolib.common.reflect.Reflex.Companion.invokeMethod
-import taboolib.common.reflect.Reflex.Companion.setProperty
+import taboolib.library.reflex.Reflex.Companion.getProperty
+import taboolib.library.reflex.Reflex.Companion.invokeMethod
+import taboolib.library.reflex.Reflex.Companion.setProperty
 import taboolib.library.xseries.XMaterial
 import java.net.URL
 import java.util.*
@@ -105,7 +105,7 @@ object Heads {
 
     private fun modifyTexture(input: String, itemStack: ItemStack): ItemStack {
         val meta = itemStack.itemMeta as SkullMeta
-        val profile = GameProfile(UUID.randomUUID(), null)
+        val profile = GameProfile(UUID.randomUUID(), "null")
         val texture = if (input.length in 60..100) encodeTexture(input) else input
 
         profile.properties.put("textures", Property("textures", texture, "TrMenu_TexturedSkull"))
@@ -116,7 +116,7 @@ object Heads {
 
     private fun encodeTexture(input: String): String {
         val encoder = Base64.getEncoder()
-        return encoder.encodeToString("{\"textures\":{\"SKIN\":{\"url\":\"http://textures.minecraft.net/texture/$input\"}}}".toByteArray())
+        return encoder.encodeToString("{\"textures\":{\"SKIN\":{\"url\":\"https://textures.minecraft.net/texture/$input\"}}}".toByteArray())
     }
 
     private fun fromURL(url: String): String {
